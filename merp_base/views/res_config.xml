@@ -44,6 +44,11 @@
                             <field name="module_merp_picking_products_skip"/>
                             <label for="module_merp_picking_products_skip"/>
                         </div>
+                        <label for="id" string="Instant Move"/>
+                        <div>
+                            <field name="module_merp_instant_move"/>
+                            <label for="module_merp_instant_move"/>
+                        </div>
                     </group>
                 </group>
             </field>

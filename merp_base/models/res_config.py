@@ -20,3 +20,6 @@ class StockConfigSettings(models.TransientModel):
 
     module_merp_picking_products_skip = fields.Boolean(
         'Allow smart skip of products in pickings and picking waves')
+
+    module_merp_instant_move = fields.Boolean(
+        'Allow add more items automatically via mERP Warehouse app')
