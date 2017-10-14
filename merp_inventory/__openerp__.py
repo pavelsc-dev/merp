@@ -34,7 +34,9 @@ Module allows to define default location that will be used for Inventory Adjustm
     ],
     'data': [
         'security/ir.model.access.csv',
+        'security/groups.xml',
         'views/res_config.xml',
         'views/res_users.xml',
+        'views/stock_inventory.xml',
     ],
 }
