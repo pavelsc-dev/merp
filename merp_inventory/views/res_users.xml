@@ -10,7 +10,6 @@
                 <data>
                     <xpath expr="//group[@name='merp']" position="inside">
                         <field name="default_inventory_location"/>
-                        <field name="validate_inventory_adjustments"/>
                     </xpath>
                 </data>
             </field>

@@ -12,15 +12,6 @@ class Inventory(models.Model):
         ('ready', 'Waiting for Validation')
     ])
 
-    validate_inventory_adjustments = fields.Boolean(
-        compute='_compute_merp_permissions', store=False,
-    )
-
-    @api.multi
-    def _compute_merp_permissions(self):
-        self.validate_inventory_adjustments = \
-            self.env.user.validate_inventory_adjustments
-
     @api.multi
     def finish_inventory(self):
         self.write({'state': 'ready'})

@@ -6,21 +6,17 @@
         <field name="model">stock.inventory</field>
         <field name="inherit_id" ref="stock.view_inventory_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='state']" position="replace">
+            <xpath expr="//field[@name='state']" position="attributes">
                 <attribute name="statusbar_visible">draft,confirm,ready,done</attribute>
             </xpath>
 
-            <xpath expr="//field[@name='date']" position="after">
-                <field name="validate_inventory_adjustments" invisible="1"/>
-            </xpath>
-
             <xpath expr="//button[@name='prepare_inventory']" position="after">
-                <button name="finish_inventory" type="object" groups="stock.group_stock_user"
-                    string="Finish Inventory"
-                    attrs="{'invisible': ['|', ('validate_inventory_adjustments', '=', False), ('state', 'not in', 'confirm')]}" />
-                <button name="return_inventory" type="object" groups="stock.group_stock_user"
-                    string="Return to In Progress"
-                    attrs="{'invisible': ['|', ('validate_inventory_adjustments','=',False), ('state', 'not in', 'ready')]}" />
+                <button name="finish_inventory" type="object" states="confirm"
+                    groups="merp_inventory.merp_inventory_allow_ready_state"
+                    string="Finish Inventory" />
+                <button name="return_inventory" type="object" states="ready"
+                    groups="merp_inventory.merp_inventory_allow_ready_state"
+                    string="Return to In Progress" />
             </xpath>
 
             <xpath expr="//button[@name='action_done']" position="attributes">
