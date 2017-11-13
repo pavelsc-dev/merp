@@ -9,3 +9,7 @@ class res_users(models.Model):
         string='Force Source Location for Instant Move',
         required=False,
     )
+
+    allow_to_change_force_source_location = fields.Boolean(
+        string='Allow to change Force Source Location',
+    )
