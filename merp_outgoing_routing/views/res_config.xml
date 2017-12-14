@@ -12,6 +12,8 @@
                            attrs="{'invisible': [('module_merp_outgoing_routing','=',False)]}"/>
                     <field name="outgoing_routing_order" widget="radio"
                            attrs="{'invisible': [('module_merp_outgoing_routing','=',False)]}"/>
+                    <field name="routing_available_for" widget="radio"
+                           attrs="{'invisible': [('module_merp_outgoing_routing','=',False)]}"/>
                 </xpath>
             </field>
         </record>
