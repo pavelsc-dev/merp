@@ -38,6 +38,13 @@ class StockConfigSettings(models.TransientModel):
         ],
         string='Routing Order', default=0)
 
+    routing_available_for = fields.Selection(
+        [
+            ('picking', 'Picking'),
+        ],
+        string='Routing Available For',
+    )
+
     @api.model
     def get_default_company_outgoing_strategy_values(self, fields):
         company = self.env.user.company_id
@@ -51,3 +58,11 @@ class StockConfigSettings(models.TransientModel):
         company = self.env.user.company_id
         company.outgoing_routing_strategy = self.outgoing_routing_strategy
         company.outgoing_routing_order = self.outgoing_routing_order
+
+    @api.model
+    def ui_get_routing_available_for(self):
+        available_for = self.fields_get(['routing_available_for']) \
+            .get('routing_available_for') \
+            .get('selection')
+
+        return dict(available_for).keys()
