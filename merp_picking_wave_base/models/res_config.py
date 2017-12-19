@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2017 Ventor, Xpansa Group (<https://ventor.tech/>).
+#    Copyright (C) 2017 Xpansa Group (<http://xpansa.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Lesser General Public License as
@@ -18,25 +18,12 @@
 #
 ##############################################################################
 
-{
-    'name': 'mERP Inventory Improvements',
-    "version": "8.0.1.0.0",
-    'author': 'Ventor, Xpansa Group',
-    'website': 'https://ventor.tech/',
-    'installable': True,
-    'images': ['static/description/main_banner.png'],
-    'description': """
-Module allows to define default location that will be used for Inventory Adjustments instead of default 'WH/Stock'
-""",
-    'summary': 'Add small improvements to Inventory Adjustment process',
-    'depends': [
-        'merp_base',
-    ],
-    'data': [
-        'security/ir.model.access.csv',
-        'security/groups.xml',
-        'views/res_config.xml',
-        'views/res_users.xml',
-        'views/stock_inventory.xml',
-    ],
-}
+from openerp import api, models, fields
+
+
+class StockConfigSettings(models.TransientModel):
+    _inherit = 'stock.config.settings'
+
+    routing_available_for = fields.Selection(
+        selection_add=[('picking_wave', 'Picking Wave')],
+    )
