@@ -23,3 +23,6 @@ class StockConfigSettings(models.TransientModel):
 
     module_merp_instant_move = fields.Boolean(
         'Allow add more items automatically via mERP Warehouse app')
+
+    module_merp_inventory = fields.Boolean(
+        'Advanced mERP Inventory Improvements')
