@@ -49,6 +49,11 @@
                             <field name="module_merp_instant_move"/>
                             <label for="module_merp_instant_move"/>
                         </div>
+                        <label for="id" string="Inventory"/>
+                        <div>
+                            <field name="module_merp_inventory"/>
+                            <label for="module_merp_inventory"/>
+                        </div>
                     </group>
                 </group>
             </field>
