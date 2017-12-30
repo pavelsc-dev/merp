@@ -1,4 +1,5 @@
-from openerp import models, fields
+from openerp import models, fields, api
+from openerp import http
 
 
 class StockConfigSettings(models.TransientModel):
@@ -26,3 +27,13 @@ class StockConfigSettings(models.TransientModel):
 
     module_merp_inventory = fields.Boolean(
         'Advanced mERP Inventory Improvements')
+
+    @api.depends('company_id')
+    def _compute_merp_version(self):
+        manifest = http.addons_manifest.get('merp_base', None)
+        version = manifest['version'].split('.')
+        return '.'.join(version[-3:])
+
+    merp_version = fields.Char(string='mERP Version',
+        compute='_compute_merp_version', store=False,
+        default=lambda self: self._compute_merp_version())
