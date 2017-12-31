@@ -49,6 +49,15 @@
                             <field name="module_merp_instant_move"/>
                             <label for="module_merp_instant_move"/>
                         </div>
+                        <label for="id" string="Inventory"/>
+                        <div>
+                            <field name="module_merp_inventory"/>
+                            <label for="module_merp_inventory"/>
+                        </div>
+                        <label for="id" string="mERP Version"/>
+                        <div>
+                            <field name="merp_version" readonly="1"/>
+                        </div>
                     </group>
                 </group>
             </field>
