@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_stock_config_settings" model="ir.ui.view">
+            <field name="name">mERP Demo - Stock Settings (Logo)</field>
+            <field name="model">stock.config.settings</field>
+            <field name="inherit_id" ref="merp_base.view_stock_config_settings"/>
+            <field name="arch" type="xml">
+                <group name="merp_application" position="inside">
+                    <label for="id" string="mERP Logo"/>
+                    <div>
+                        <field name="merp_logotype_name" invisible="1"/>
+                        <field name="merp_logotype_file" widget="binary"
+                            filename="merp_logotype_name"
+                            groups="merp_custom_logotype.merp_update_customer_logotype"/>
+                    </div>
+                </group>
+            </field>
+        </record>
+
+    </data>
+</openerp>
