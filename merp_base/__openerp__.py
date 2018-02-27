@@ -34,6 +34,7 @@ Base module that allow relation between mERP modules
         'stock',
     ],
     'data': [
+        'views/merp_config.xml',
         'views/res_config.xml',
         'views/res_users.xml',
     ],

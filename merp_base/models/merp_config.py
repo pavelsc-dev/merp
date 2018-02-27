@@ -1,7 +1,12 @@
 from openerp import models, fields, api
 
 
-class merpConfig(models.TransientModel):
+class merpConfigSettings(models.TransientModel):
+    _name = 'merp.config.settings'
+    _inherit = 'res.config.settings'
+
+
+class merpConfig(models.Model):
     _name = 'merp.config'
     _rec_name = 'key'
 

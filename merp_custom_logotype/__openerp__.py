@@ -35,6 +35,6 @@ Adds customer logotype for mERP app
     ],
     'data': [
         'security/groups.xml',
-        'views/res_config.xml',
+        'views/merp_config.xml',
     ],
 }

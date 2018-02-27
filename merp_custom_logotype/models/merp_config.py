@@ -10,8 +10,8 @@ LOGOTYPE_W = 500
 LOGOTYPE_H = 500
 
 
-class StockConfigSettings(models.TransientModel):
-    _inherit = 'stock.config.settings'
+class merpConfigSettings(models.TransientModel):
+    _inherit = 'merp.config.settings'
 
     merp_logotype_file = fields.Binary('mERP logotype file')
     merp_logotype_name = fields.Char('mERP logotype name')
@@ -21,8 +21,8 @@ class StockConfigSettings(models.TransientModel):
         conf = self.env['merp.config'].sudo()
         logo = conf.get_param('logo.file', default=None)
         name = conf.get_param('logo.name', default=None)
-        return {'merp_logotype_file': logo or '',
-                'merp_logotype_name': name or ''}
+        return {'merp_logotype_file': logo or False,
+                'merp_logotype_name': name or False}
 
     @api.multi
     def set_merp_logotype(self):
