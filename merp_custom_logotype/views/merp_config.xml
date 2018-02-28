@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_merp_config_settings_logotype" model="ir.ui.view">
+            <field name="name">mERP Settings (Logo)</field>
+            <field name="model">merp.config.settings</field>
+            <field name="inherit_id" ref="merp_base.view_merp_config_settings" />
+            <field name="arch" type="xml">
+                <header position="after">
+                    <separator string="Ventor app"/>
+                    <group>
+                        <label for="id" string="Logo"/>
+                        <div>
+                            <field name="merp_logotype_name" invisible="1"/>
+                            <field name="merp_logotype_file" widget="binary"
+                                filename="merp_logotype_name" />
+                        </div>
+                    </group>
+                </header>
+            </field>
+        </record>
+
+    </data>
+</odoo>
