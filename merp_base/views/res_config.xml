@@ -58,6 +58,11 @@
                         <div>
                             <field name="merp_version" readonly="1"/>
                         </div>
+                        <label for="id" string="Customer Logotype"/>
+                        <div>
+                            <field name="module_merp_custom_logotype"/>
+                            <label for="module_merp_custom_logotype"/>
+                        </div>
                     </group>
                 </group>
             </field>
