@@ -19,22 +19,20 @@
 ##############################################################################
 
 {
-    'name': 'mERP Customer Logotype',
+    'name': 'Ventor Customer Logotype',
     "version": "8.0.1.0.0",
     'author': 'Ventor, Xpansa Group',
     'website': 'https://ventor.tech/',
     'installable': True,
     'images': ['static/description/main_banner.png'],
     'description': """
-Adds customer logotype for mERP app
+Adds customer logotype for Ventor app
 """,
-    'summary': 'Customer logotype for mERP app',
+    'summary': 'Customer logotype for Ventor app',
     'depends': [
         'merp_base',
-        'merp_custom_access_rights'
     ],
     'data': [
-        'security/groups.xml',
         'views/merp_config.xml',
     ],
 }

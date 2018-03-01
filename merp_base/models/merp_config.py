@@ -19,7 +19,7 @@ class merpConfig(models.Model):
 
     @api.model
     def get_param(self, key, default=False):
-    	params = self.search_read([('key', '=', key)], fields=['value'], limit=1)
+        params = self.search_read([('key', '=', key)], fields=['value'], limit=1)
         return params[0]['value'] if params else default
 
     @api.model
@@ -34,7 +34,7 @@ class merpConfig(models.Model):
                 param.unlink()
         else:
             if value is not False and value is not None:
-            	vals.update(key=key)
+                vals.update(key=key)
                 self.create(vals)
 
         return False

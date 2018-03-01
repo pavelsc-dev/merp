@@ -19,7 +19,7 @@
 ##############################################################################
 
 {
-    'name': 'mERP Picking Product Skip',
+    'name': 'Ventor Picking Product Skip',
     "version": "8.0.1.0.0",
     'author': 'Ventor, Xpansa Group',
     'website': 'https://ventor.tech/',
