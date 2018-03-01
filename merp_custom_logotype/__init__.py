@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2017 Ventor, Xpansa Group (<https://ventor.tech/>).
+#    Copyright (C) 2017 Xpansa Group (<http://xpansa.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Lesser General Public License as
@@ -18,22 +18,4 @@
 #
 ##############################################################################
 
-{
-    'name': 'Ventor Picking Wave Product Skip',
-    "version": "8.0.1.0.0",
-    'author': 'Ventor, Xpansa Group',
-    'website': 'https://ventor.tech/',
-    'installable': True,
-    'images': ['static/description/icon.png'],
-    'description': """
-Allows smart skip of products in picking waves
-""",
-    'summary': 'Allows smart skip of products in picking waves',
-    'depends': [
-        'merp_picking_products_skip',
-        'merp_picking_wave_base',
-    ],
-    'data': [
-        'views/stock_picking.xml',
-    ],
-}
+import models

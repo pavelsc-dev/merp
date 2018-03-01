@@ -19,21 +19,20 @@
 ##############################################################################
 
 {
-    'name': 'Ventor Picking Wave Product Skip',
+    'name': 'Ventor Customer Logotype',
     "version": "8.0.1.0.0",
     'author': 'Ventor, Xpansa Group',
     'website': 'https://ventor.tech/',
     'installable': True,
-    'images': ['static/description/icon.png'],
+    'images': ['static/description/main_banner.png'],
     'description': """
-Allows smart skip of products in picking waves
+Adds customer logotype for Ventor app
 """,
-    'summary': 'Allows smart skip of products in picking waves',
+    'summary': 'Customer logotype for Ventor app',
     'depends': [
-        'merp_picking_products_skip',
-        'merp_picking_wave_base',
+        'merp_base',
     ],
     'data': [
-        'views/stock_picking.xml',
+        'views/merp_config.xml',
     ],
 }
