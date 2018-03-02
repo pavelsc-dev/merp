@@ -19,22 +19,20 @@
 ##############################################################################
 
 {
-    'name': 'Ventor Receiving Wave',
+    'name': 'Ventor Customer Logotype',
     "version": "10.0.1.0.0",
     'author': 'Ventor, Xpansa Group',
     'website': 'https://ventor.tech/',
     'installable': True,
     'images': ['static/description/main_banner.png'],
     'description': """
-Allows configurable receiving wave
+Adds customer logotype for Ventor app
 """,
-    'summary': 'Allows configurable receiving wave',
+    'summary': 'Customer logotype for Ventor app',
     'depends': [
-        'merp_picking_wave_core',
-        'merp_receiving_wave_access_rights',
+        'merp_base',
     ],
     'data': [
-        'views/res_config.xml',
-        'views/stock_picking_wave.xml',
+        'views/merp_config.xml',
     ],
 }

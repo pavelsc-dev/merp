@@ -19,7 +19,7 @@
 ##############################################################################
 
 {
-    'name': 'mERP Picking Wave Product Skip',
+    'name': 'Ventor Picking Wave Product Skip',
     "version": "10.0.1.0.0",
     'author': 'Ventor, Xpansa Group',
     'website': 'https://ventor.tech/',
