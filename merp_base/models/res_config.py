@@ -31,6 +31,9 @@ class StockConfigSettings(models.TransientModel):
     module_merp_inventory = fields.Boolean(
         'Advanced mERP Inventory Improvements')
 
+    module_merp_custom_logotype = fields.Boolean(
+        'Enable Customer Logotype')
+
     @api.depends('company_id')
     def _compute_merp_version(self):
         manifest = http.addons_manifest.get('merp_base', None)

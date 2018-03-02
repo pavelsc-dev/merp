@@ -19,24 +19,20 @@
 ##############################################################################
 
 {
-    'name': 'Ventor Base',
+    'name': 'Ventor Customer Logotype',
     "version": "8.0.1.0.0",
     'author': 'Ventor, Xpansa Group',
     'website': 'https://ventor.tech/',
     'installable': True,
     'images': ['static/description/main_banner.png'],
     'description': """
-Base module that allow relation between Ventor modules
+Adds customer logotype for Ventor app
 """,
-    'summary': 'Base module that allow relation between Ventor modules',
+    'summary': 'Customer logotype for Ventor app',
     'depends': [
-        'base',
-        'stock',
+        'merp_base',
     ],
     'data': [
-        'security/ir.model.access.csv',
         'views/merp_config.xml',
-        'views/res_config.xml',
-        'views/res_users.xml',
     ],
 }
