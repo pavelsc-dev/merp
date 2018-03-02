@@ -19,20 +19,20 @@
 ##############################################################################
 
 {
-    'name': 'Ventor Picking Wave Access Rights',
+    'name': 'Ventor Customer Logotype',
     "version": "9.0.1.0.0",
     'author': 'Ventor, Xpansa Group',
     'website': 'https://ventor.tech/',
     'installable': True,
     'images': ['static/description/main_banner.png'],
     'description': """
-Ventor Picking Wave Access Rights
+Adds customer logotype for Ventor app
 """,
-    'summary': 'Ventor Picking Wave Access Rights',
+    'summary': 'Customer logotype for Ventor app',
     'depends': [
-        'merp_custom_access_rights',
+        'merp_base',
     ],
     'data': [
-        'security/groups.xml',
+        'views/merp_config.xml',
     ],
 }
