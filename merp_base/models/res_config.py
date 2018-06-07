@@ -9,27 +9,27 @@ class StockConfigSettings(models.TransientModel):
         'Add Outgoing Routing strategy options (sort locations)')
 
     module_merp_custom_access_rights = fields.Boolean(
-        'Enable Custom Access Rights for mERP Warehouse App')
+        'Enable Custom Access Rights for Ventor App')
 
     module_merp_receiving_wave_access_rights = fields.Boolean(
-        'Enable Receiving Wave Access Rights for mERP Warehouse App')
+        'Enable Receiving Wave Access Rights for Ventor App')
     module_merp_receiving_wave = fields.Boolean('Enable Receiving Wave')
 
     module_merp_picking_wave_access_rights = fields.Boolean(
-        'Enable Picking Wave Rights for mERP Warehouse App')
+        'Enable Picking Wave Rights for Ventor App')
     module_merp_picking_wave = fields.Boolean('Enable Picking Wave')
 
     module_merp_picking_products_skip = fields.Boolean(
         'Allow smart skip of products in pickings and picking waves')
 
     module_merp_instant_move = fields.Boolean(
-        'Allow add more items automatically via mERP Warehouse app')
+        'Allow add more items automatically via Ventor App')
 
     module_merp_inventory = fields.Boolean(
-        'Advanced mERP Inventory Improvements')
+        'Advanced Ventor/mERP Inventory Improvements')
 
     module_merp_custom_logotype = fields.Boolean(
-        'Enable Customer Logotype')
+        'Use Custom Logo')
 
     @api.depends('company_id')
     def _compute_merp_version(self):
@@ -37,6 +37,6 @@ class StockConfigSettings(models.TransientModel):
         version = manifest['version'].split('.')
         return '.'.join(version[-3:])
 
-    merp_version = fields.Char(string='mERP Version',
+    merp_version = fields.Char(string='Ventor/mERP Version',
         compute='_compute_merp_version', store=False,
         default=lambda self: self._compute_merp_version())
