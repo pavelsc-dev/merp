@@ -34,5 +34,6 @@ Adds customer logotype for Ventor app
     ],
     'data': [
         'views/merp_config.xml',
+        'views/res_config.xml',
     ],
 }
