@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="merp_base.view_merp_config_settings" />
             <field name="arch" type="xml">
                 <header position="after">
-                    <separator string="Ventor app"/>
+                    <separator string="Ventor/mERP App"/>
                     <group>
                         <label for="id" string="Logo"/>
                         <div>
