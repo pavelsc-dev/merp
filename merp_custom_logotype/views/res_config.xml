@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_stock_config_settings" model="ir.ui.view">
+            <field name="name">Ventor/mERP Demo - Stock Settings</field>
+            <field name="model">base.config.settings</field>
+            <field name="inherit_id" ref="base_setup.view_general_configuration"/>
+            <field name="arch" type="xml">
+                <group name="report" position="before">
+                    <group string="Ventor/mERP Application" name="merp_application">
+                        <label for="id" string="Customer Logotype"/>
+                        <div>
+                            <field name="module_merp_custom_logotype"/>
+                            <label for="module_merp_custom_logotype"/>
+                        </div>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+    </data>
+</odoo>
