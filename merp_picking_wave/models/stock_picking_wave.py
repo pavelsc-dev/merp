@@ -12,6 +12,27 @@ class PickingWave(models.Model):
 
         if behavior == 1:
             # i.e. close pickings in wave without creating backorders
+            for wave in self:
+                for picking in wave.picking_ids:
+                    if picking.state in ('cancel', 'done'):
+                        continue
+                    if picking.state == 'draft' \
+                            or all([x.qty_done == 0.0
+                                    for x in picking.pack_operation_ids]):
+                        # In draft or with no pack operations edited yet,
+                        # remove from wave
+                        picking.wave_id = False
+                        continue
+                    if not picking.pack_operation_ids:
+                        picking.do_prepare_partial()
+                    for pack in picking.pack_operation_ids.with_context(no_recompute=True):
+                        pack.product_qty = pack.qty_done
+                    picking.do_transfer()
+
+                    # Find backorder and remove it from wave
+                    back_orders = picking_obj.search([
+                        ('backorder_id', '=', picking.id)])
+                    back_orders.unlink()
             return super(PickingWave, self).done()
 
         elif behavior == 0:
