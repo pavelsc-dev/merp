@@ -16,10 +16,8 @@ class PickingWave(models.Model):
                 for picking in wave.picking_ids:
                     if picking.state in ('cancel', 'done'):
                         continue
-                    if picking.state == 'draft' \
-                            or all([x.qty_done == 0.0
-                                    for x in picking.pack_operation_ids]):
-                        # In draft or with no pack operations edited yet,
+                    if picking.state == 'draft':
+                        # In draft
                         # remove from wave
                         picking.wave_id = False
                         continue
@@ -28,11 +26,6 @@ class PickingWave(models.Model):
                     for pack in picking.pack_operation_ids.with_context(no_recompute=True):
                         pack.product_qty = pack.qty_done
                     picking.do_transfer()
-
-                    # Find backorder and remove it from wave
-                    back_orders = picking_obj.search([
-                        ('backorder_id', '=', picking.id)])
-                    back_orders.unlink()
             return super(PickingWave, self).done()
 
         elif behavior == 0:
@@ -113,3 +106,20 @@ class StockPicking(models.Model):
             '|',
             ('name', '=', name),
             ('origin','=', name)])
+
+    @api.multi
+    def do_transfer(self):
+        res = super(StockPicking, self).do_transfer()
+        behavior = self.env.user.company_id.outgoing_wave_behavior_on_confirm
+        for picking in self:
+            wave = picking.wave_id
+            wtype = wave and wave.picking_wave_type
+            if behavior == 1 and wtype and \
+               ((wtype.warehouse_id.pick_type_id.id == wtype.id and \
+               wtype.warehouse_id.delivery_steps != 'ship_only') or \
+               wtype.code == 'outgoing'):
+                # Find backorder and remove it
+                back_orders = self.search([
+                    ('backorder_id', '=', picking.id)])
+                back_orders.unlink()
+        return res
