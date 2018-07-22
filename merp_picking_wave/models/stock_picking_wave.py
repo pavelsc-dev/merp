@@ -16,8 +16,10 @@ class PickingWave(models.Model):
                 for picking in wave.picking_ids:
                     if picking.state in ('cancel', 'done'):
                         continue
-                    if picking.state == 'draft':
-                        # In draft
+                    if picking.state == 'draft' \
+                            or all([x.qty_done == 0.0
+                                    for x in picking.pack_operation_ids]):
+                        # In draft or with no pack operations edited yet,
                         # remove from wave
                         picking.wave_id = False
                         continue
