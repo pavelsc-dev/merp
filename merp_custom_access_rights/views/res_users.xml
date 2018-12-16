@@ -10,8 +10,10 @@
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="//group[@name='merp']" position="inside">
-                        <field name="stock_location_id"/>
-                        <field name="allow_to_change_force_source_location"/>
+                        <label for="stock_location_id" colspan="4"/>
+                        <field name="stock_location_id" nolabel="1" colspan="4"/>
+                        <label for="allow_to_change_force_source_location" colspan="4"/>
+                        <field name="allow_to_change_force_source_location" nolabel="1" colspan="4"/>
                     </xpath>
                 </data>
             </field>
