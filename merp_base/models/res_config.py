@@ -12,25 +12,36 @@ class StockConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     module_merp_outgoing_routing = fields.Boolean(
-        'Outgoing Routing')
+        string='Outgoing Routing'
+    )
 
     module_merp_custom_access_rights = fields.Boolean(
-        'Custom Access Rights')
+        string='Custom Access Rights',
+    )
 
     module_merp_picking_wave = fields.Boolean(
-        'Picking Wave')
+        string='Picking Wave',
+    )
 
     module_merp_picking_products_skip = fields.Boolean(
-        'Smart Skip of Products')
+        string='Smart Skip of Products',
+    )
 
     module_merp_instant_move = fields.Boolean(
-        'Instant Move')
+        string='Instant Move',
+    )
 
     module_merp_inventory = fields.Boolean(
-        'Ventor/mERP Inventory')
+        string='Ventor/mERP Inventory',
+    )
 
     module_merp_custom_logotype = fields.Boolean(
-        'Use Custom Logo')
+        string='Use Custom Logo',
+    )
+
+    module_merp_internal_warehouse = fields.Boolean(
+        string='Ventor Internal Warehouse',
+    )
 
     merp_version = fields.Char(
         string='Ventor/mERP Version',
