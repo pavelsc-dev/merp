@@ -1,4 +1,7 @@
-from openerp import models, fields, api, _
+# Copyright 2019 VentorTech OU
+# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+
+from odoo import models, api, _
 
 
 class PickingWave(models.Model):
@@ -52,7 +55,6 @@ class PickingWave(models.Model):
                     else:
                         if not picking.move_line_ids:
                             picking.do_prepare_partial()
-                        all_processed = True
                         if picking.move_line_ids.filtered(lambda o: o.qty_done < o.product_qty):
                             on_hold = True
                         else:
@@ -91,4 +93,4 @@ class StockPicking(models.Model):
             ('state', 'in', ('assigned', 'partially_available')),
             '|',
             ('name', '=', name),
-            ('origin','=', name)])
+            ('origin', '=', name)])

@@ -1,4 +1,7 @@
-from openerp import models, fields, api
+# Copyright 2019 VentorTech OU
+# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+
+from odoo import models, fields, api
 from odoo import http
 
 import logging
@@ -29,8 +32,11 @@ class StockConfigSettings(models.TransientModel):
     module_merp_custom_logotype = fields.Boolean(
         'Use Custom Logo')
 
-    merp_version = fields.Char(string='Ventor/mERP Version',
-        compute='_compute_merp_version', store=False)
+    merp_version = fields.Char(
+        string='Ventor/mERP Version',
+        compute='_compute_merp_version',
+        store=False,
+    )
 
     @api.depends('company_id')
     def _compute_merp_version(self):

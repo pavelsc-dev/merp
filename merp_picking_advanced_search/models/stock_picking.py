@@ -1,4 +1,7 @@
-from openerp import models, api, fields
+# Copyright 2019 VentorTech OU
+# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+
+from odoo import models, api, fields
 
 
 class StockPicking(models.Model):

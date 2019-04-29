@@ -1,4 +1,7 @@
-from openerp import models, fields, api, exceptions, _
+# Copyright 2019 VentorTech OU
+# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+
+from odoo import models, fields, api, exceptions, _
 
 
 class PickingWave(models.Model):
@@ -95,11 +98,21 @@ class ProcurementGroup(models.Model):
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    first_proc_picking = fields.Many2one('stock.picking',
+    first_proc_picking = fields.Many2one(
+        comodel_name='stock.picking',
         string='First picking from the same procurement group',
-        readonly=True, store=True, compute='_compute_first_proc_picking')
-    wave_location_id = fields.Many2one('stock.location', string='Wave Location',
-        readonly=True, store=True, related='first_proc_picking.batch_id.location_id')
+        readonly=True,
+        store=True,
+        compute='_compute_first_proc_picking',
+    )
+
+    wave_location_id = fields.Many2one(
+        comodel_name='stock.location',
+        string='Wave Location',
+        readonly=True,
+        store=True,
+        related='first_proc_picking.batch_id.location_id',
+    )
 
     @api.multi
     @api.depends('group_id', 'group_id.picking_ids')
@@ -117,7 +130,7 @@ class StockPicking(models.Model):
         if not picking.batch_id.picking_wave_type:
             picking.batch_id.write({'picking_wave_type': picking.picking_type_id.id})
         elif picking.batch_id.picking_wave_type.id != picking.picking_type_id.id:
-            raise exceptions.Warning(_('''Picking cannot be added. 
+            raise exceptions.Warning(_('''Picking cannot be added.
                 All pickings in the current picking wave should be from zone %s
                 ''' % picking.batch_id.picking_wave_type.name))
         return picking
@@ -131,7 +144,7 @@ class StockPicking(models.Model):
             if not picking.batch_id.picking_wave_type:
                 picking.batch_id.write({'picking_wave_type': picking.picking_type_id.id})
             elif picking.batch_id.picking_wave_type.id != picking.picking_type_id.id:
-                raise exceptions.Warning(_('''Picking cannot be added. 
+                raise exceptions.Warning(_('''Picking cannot be added.
                     All pickings in the current picking wave should be from zone %s
                     ''' % picking.batch_id.picking_wave_type.name))
         return res
