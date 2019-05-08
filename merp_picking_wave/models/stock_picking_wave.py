@@ -12,6 +12,7 @@ class PickingWave(models.Model):
         picking_obj = self.env['stock.picking']
         message_obj = self.env['message.wizard']
         behavior = self.env.user.company_id.outgoing_wave_behavior_on_confirm
+        remove_not_moved = self.env.user.company_id.outgoing_wave_remove_not_moved
 
         if behavior == 1:
             # i.e. close pickings in wave without creating backorders
@@ -23,9 +24,8 @@ class PickingWave(models.Model):
                 for picking in wave.picking_ids:
                     if picking.state in ('cancel', 'done'):
                         continue
-                    if picking.state == 'draft' \
-                            or all([x.qty_done == 0.0
-                                    for x in picking.move_line_ids]):
+                    picking_not_moved = all([x.qty_done == 0.0 for x in picking.move_line_ids])
+                    if remove_not_moved and (picking.state == 'draft' or picking_not_moved):
                         # In draft or with no pack operations edited yet,
                         # remove from wave
                         picking.batch_id = False
