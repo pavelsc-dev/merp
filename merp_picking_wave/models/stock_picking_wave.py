@@ -9,17 +9,11 @@ class PickingWave(models.Model):
 
     @api.multi
     def done_outgoing(self):
-        picking_obj = self.env['stock.picking']
         message_obj = self.env['message.wizard']
         behavior = self.env.user.company_id.outgoing_wave_behavior_on_confirm
         remove_not_moved = self.env.user.company_id.outgoing_wave_remove_not_moved
-
-        if behavior == 1:
-            # i.e. close pickings in wave without creating backorders
-            return super(PickingWave, self).done()
-
-        elif behavior == 0:
-            # i.e. close pickings in wave with creation of backorders for incomplete pickings
+        if behavior in (0, 1):
+            # i.e. close pickings in wave with/without creating backorders
             for wave in self:
                 for picking in wave.picking_ids:
                     if picking.state in ('cancel', 'done'):
@@ -30,16 +24,20 @@ class PickingWave(models.Model):
                         # remove from wave
                         picking.batch_id = False
                         continue
-                    if not picking.move_line_ids:
-                        picking.do_prepare_partial()
-                    for pack in picking.move_line_ids.with_context(no_recompute=True):
-                        pack.product_qty = pack.qty_done
-                    picking.do_transfer()
-
-                    # Find backorder and remove it from wave
-                    back_orders = picking_obj.search([
-                        ('backorder_id', '=', picking.id)])
-                    back_orders.write({'batch_id': False})
+                    if picking.state != 'assigned':
+                        picking.action_assign()
+                    if picking.state == 'assigned':
+                        for move in picking.move_lines.filtered(lambda m: m.state not in ['done', 'cancel']):
+                            for move_line in move.move_line_ids:
+                                move_line.qty_done = move_line.product_uom_qty
+                    picking.action_done()
+                    backorder_pick = self.env['stock.picking'].search([('backorder_id', '=', picking.id)])
+                    if backorder_pick:
+                        backorder_pick.write({'batch_id': False})
+                        if behavior == 1:
+                            # i.e. close pickings in wave without creating backorders
+                            backorder_pick.action_cancel()
+                            picking.message_post(body=_("Back order <em>%s</em> <b>cancelled</b>.") % (backorder_pick.name))
             return super(PickingWave, self).done()
 
         elif behavior == 2:
@@ -51,7 +49,8 @@ class PickingWave(models.Model):
                     if picking.state in ('cancel', 'done'):
                         continue
                     elif picking.state != 'assigned':
-                        break
+                        on_hold = True
+                        continue
                     else:
                         if not picking.move_line_ids:
                             picking.do_prepare_partial()
