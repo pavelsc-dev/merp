@@ -42,6 +42,7 @@ class PickingWave(models.Model):
             return super(PickingWave, self).done()
 
         elif behavior == 2:
+            print("We are moving On Hold")
             # i.e. move wave to on hold if not all pickings are confirmed
             message = ''
             on_hold = False
@@ -66,18 +67,11 @@ class PickingWave(models.Model):
 Not all products were found in wave pickings.
 Wave is moved to "On Hold" for manual processing.
                     ''')
-                elif wave.picking_ids:
-                    super(PickingWave, self).done()
-                    message = _('All pickings were confirmed!')
-
+                else:
+                    self.write({'state': 'done'})
             if message:
-                return {
-                    'message': message_obj.with_context(message=message).wizard_view()
-                }
-
+                return message_obj.with_context(message=message).wizard_view()
             return True
-
-        return False
 
 
 class StockPicking(models.Model):
