@@ -4,7 +4,7 @@
 
 {
     'name': 'Ventor Internal Warehouse',
-    'version': '12.0.1.1.0',
+    'version': '11.0.1.1.0',
     'author': 'Ventor, Xpansa Group',
     'website': 'https://ventor.tech/',
     'installable': True,
