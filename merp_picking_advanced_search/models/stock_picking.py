@@ -11,11 +11,12 @@ class StockPicking(models.Model):
         'product.product', string='Product Not Moved',
         compute='_compute_products_not_moved', related=False, store=True)
 
-    @api.one
+    @api.multi
     @api.depends('move_line_ids.qty_done')
     def _compute_products_not_moved(self):
-        res = self.env['product.product']
-        for operation in self.move_line_ids:
-            if operation.qty_done < operation.product_qty:
-                res += operation.product_id
-        self.product_id_not_moved = res
+        for rec in self:
+            res = self.env['product.product']
+            for operation in rec.move_line_ids:
+                if operation.qty_done < operation.product_qty:
+                    res += operation.product_id
+            rec.product_id_not_moved = res

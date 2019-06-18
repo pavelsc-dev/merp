@@ -132,7 +132,7 @@ class StockPicking(models.Model):
         elif picking.batch_id.picking_wave_type.id != picking.picking_type_id.id:
             raise exceptions.Warning(_('''Picking cannot be added.
                 All pickings in the current picking wave should be from zone %s
-                ''' % picking.batch_id.picking_wave_type.name))
+                ''') % picking.batch_id.picking_wave_type.name)
         return picking
 
     @api.multi
@@ -146,5 +146,5 @@ class StockPicking(models.Model):
             elif picking.batch_id.picking_wave_type.id != picking.picking_type_id.id:
                 raise exceptions.Warning(_('''Picking cannot be added.
                     All pickings in the current picking wave should be from zone %s
-                    ''' % picking.batch_id.picking_wave_type.name))
+                    ''') % picking.batch_id.picking_wave_type.name)
         return res

@@ -74,8 +74,10 @@ Wave is moved to "On Hold" for manual processing.
                 return {
                     'message': message_obj.with_context(message=message).wizard_view()
                 }
-            else:
-                return True
+
+            return True
+
+        return False
 
 
 class StockPicking(models.Model):
