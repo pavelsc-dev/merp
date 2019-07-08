@@ -3,7 +3,7 @@
 
 {
     'name': 'Ventor Product Barcode Multi',
-    "version": "12.0.1.0.0",
+    "version": "11.0.1.0.0",
     'author': 'VentorTech',
     'website': 'https://ventor.tech/',
     'license': 'LGPL-3',
