@@ -89,4 +89,4 @@ class TestPickingAdvancedSearch(TransactionCase):
     def test_check_product_not_moved(self):
         self.assertEqual(len(self.stock_picking_1.product_id_not_moved), 1)
         self.assertEqual(len(self.stock_picking_2.product_id_not_moved), 0)
-        self.assertEqual(len(self.stock_picking_3.product_id_not_moved), 1)
+        self.assertEqual(len(self.stock_picking_3.product_id_not_moved), 0)
