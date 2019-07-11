@@ -48,7 +48,6 @@ class TestMerpPickingWave(TransactionCase):
             'name': 'test_stock_picking_batch',
             'picking_ids': [(4, self.stock_picking_1.id)]
         })
-        product_uom = company.currency_id
         products = self.env['product.template'].search([], limit=2)
         self.move_line_1 = self.env['stock.move.line'].create({
             'picking_id': self.stock_picking_1.id,
@@ -57,7 +56,7 @@ class TestMerpPickingWave(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_2.id,
             'product_uom_qty': 0.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': products[0].uom_id.id,
             'product_id': products[0].id
         })
         self.move_line_2 = self.env['stock.move.line'].create({
@@ -67,7 +66,7 @@ class TestMerpPickingWave(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_1.id,
             'product_uom_qty': 0.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': products[1].uom_id.id,
             'product_id': products[1].id
         })
 
