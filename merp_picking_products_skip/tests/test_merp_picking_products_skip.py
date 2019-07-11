@@ -27,7 +27,6 @@ class TestMerpPickingProductsSkip(TransactionCase):
             'company_id': company.id,
             'picking_type_id': picking_type.id
         })
-        product_uom = company.currency_id
         products = self.env['product.template'].search([], limit=2)
         self.move_line_1 = self.env['stock.move.line'].create({
             'picking_id': self.stock_picking.id,
@@ -36,7 +35,7 @@ class TestMerpPickingProductsSkip(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_2.id,
             'product_uom_qty': 20.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': 1,
             'product_id': products[0].id,
             'skipped': False
         })
@@ -47,7 +46,7 @@ class TestMerpPickingProductsSkip(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_1.id,
             'product_uom_qty': 25.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': 1,
             'product_id': products[1].id,
             'skipped': True
         })
