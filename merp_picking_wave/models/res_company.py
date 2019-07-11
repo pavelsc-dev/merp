@@ -18,4 +18,5 @@ class Company(models.Model):
 
     outgoing_wave_remove_not_moved = fields.Boolean(
         string='Remove pickings with no done transfers on Batch Picking Closing',
-        default=False)
+        default=False,
+        store=True)

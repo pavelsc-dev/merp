@@ -48,7 +48,6 @@ class TestMerpPickingWave(TransactionCase):
             'name': 'test_stock_picking_batch',
             'picking_ids': [(4, self.stock_picking_1.id)]
         })
-        product_uom = company.currency_id
         products = self.env['product.template'].search([], limit=2)
         self.move_line_1 = self.env['stock.move.line'].create({
             'picking_id': self.stock_picking_1.id,
@@ -57,7 +56,7 @@ class TestMerpPickingWave(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_2.id,
             'product_uom_qty': 0.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': products[0].uom_id.id,
             'product_id': products[0].id
         })
         self.move_line_2 = self.env['stock.move.line'].create({
@@ -67,7 +66,7 @@ class TestMerpPickingWave(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_1.id,
             'product_uom_qty': 0.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': products[1].uom_id.id,
             'product_id': products[1].id
         })
 
@@ -104,7 +103,6 @@ class TestMerpPickingWave(TransactionCase):
         self.picking_batch.done_outgoing()
         self.assertEqual(self.stock_picking_1.state, 'done')
 
-
     def test_wave_without_creating_backorders(self):
         self.env.user.company_id.write({
             'outgoing_wave_behavior_on_confirm': 1
@@ -116,13 +114,13 @@ class TestMerpPickingWave(TransactionCase):
         backorder_pick = self.env['stock.picking'].search([('backorder_id', '=', self.stock_picking_1.id)])
         self.assertEqual(backorder_pick.state, 'cancel')
 
-
     def test_move_wave_to_on_hold_variant_1(self):
         self.env.user.company_id.write({
             'outgoing_wave_behavior_on_confirm': 2
         })
+        self.stock_move_draft[0].write({'state': 'cancel'})
         self.stock_picking_1.write({
-            'move_lines': [(4, self.stock_move_cancel.id)]
+            'move_lines': [(4, self.stock_move_draft[0].id)]
         })
         self.picking_batch.done_outgoing()
         self.assertEqual(self.picking_batch.state, 'done')
