@@ -45,7 +45,6 @@ class TestMerpOutgoingRouting(TransactionCase):
             'company_id': company.id,
             'picking_type_id': picking_type.id
         })
-        product_uom =company.currency_id
         products = self.env['product.template'].search([], limit=4)
         self.move_line_1 = self.env['stock.move.line'].create({
             'picking_id': self.stock_picking.id,
@@ -54,7 +53,7 @@ class TestMerpOutgoingRouting(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_2.id,
             'product_uom_qty': 20.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': 1,
             'product_id': products[0].id
         })
         self.move_line_2 = self.env['stock.move.line'].create({
@@ -64,7 +63,7 @@ class TestMerpOutgoingRouting(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_3.id,
             'product_uom_qty': 25.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': 1,
             'product_id': products[1].id
         })
         self.move_line_3 = self.env['stock.move.line'].create({
@@ -72,9 +71,9 @@ class TestMerpOutgoingRouting(TransactionCase):
             'qty_done': 3.0,
             'location_id': self.location_3.id,
             'date': datetime.now(),
-            'location_dest_id': self.location_1.id,
+            'location_dest_id': self.location_2.id,
             'product_uom_qty': 15.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': 1,
             'product_id': products[2].id
         })
         self.move_line_4 = self.env['stock.move.line'].create({
@@ -84,11 +83,12 @@ class TestMerpOutgoingRouting(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_2.id,
             'product_uom_qty': 10.0,
-            'product_uom_id': product_uom.id,
+            'product_uom_id': 1,
             'product_id': products[3].id
         })
 
     def test_sort_alphabet_a_z(self):
+        print('ok')
         outgoing_routing_strategy = 'name'
         outgoing_routing_order = 0
         self.check_sort(outgoing_routing_strategy, outgoing_routing_order)
