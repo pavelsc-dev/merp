@@ -39,6 +39,7 @@ class TestMerpPickingWaveBase(TransactionCase):
             'name': 'test_stock_picking_batch',
             'picking_ids': [(4, self.stock_picking.id, 0)]
         })
+        product_uom = self.env['product.uom'].search([], limit=1, order='id')
         products = self.env['product.template'].search([], limit=4)
         self.move_line_1 = self.env['stock.move.line'].create({
             'picking_id': self.stock_picking.id,
@@ -47,7 +48,7 @@ class TestMerpPickingWaveBase(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_2.id,
             'product_uom_qty': 20.0,
-            'product_uom_id': 1,
+            'product_uom_id': product_uom.id,
             'product_id': products[0].id
         })
         self.move_line_2 = self.env['stock.move.line'].create({
@@ -57,7 +58,7 @@ class TestMerpPickingWaveBase(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_3.id,
             'product_uom_qty': 25.0,
-            'product_uom_id': 1,
+            'product_uom_id': product_uom.id,
             'product_id': products[1].id
         })
         self.move_line_3 = self.env['stock.move.line'].create({
@@ -67,7 +68,7 @@ class TestMerpPickingWaveBase(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_1.id,
             'product_uom_qty': 15.0,
-            'product_uom_id': 1,
+            'product_uom_id': product_uom.id,
             'product_id': products[2].id
         })
         self.move_line_4 = self.env['stock.move.line'].create({
@@ -77,7 +78,7 @@ class TestMerpPickingWaveBase(TransactionCase):
             'date': datetime.now(),
             'location_dest_id': self.location_2.id,
             'product_uom_qty': 10.0,
-            'product_uom_id': 1,
+            'product_uom_id': product_uom.id,
             'product_id': products[3].id
         })
 
