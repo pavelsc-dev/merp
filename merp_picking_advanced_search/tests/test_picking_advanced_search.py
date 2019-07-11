@@ -43,7 +43,6 @@ class TestPickingAdvancedSearch(TransactionCase):
             'company_id': company.id,
             'picking_type_id': picking_type.id
         })
-        product_uom = company.currency_id
         products = self.env['product.template'].search([], limit=3)
         self.move_line_1 = self.env['stock.move.line'].create({
             'picking_id': self.stock_picking_1.id,
@@ -71,7 +70,7 @@ class TestPickingAdvancedSearch(TransactionCase):
             'location_id': self.location_2.id,
             'date': datetime.now(),
             'location_dest_id': self.location_1.id,
-            'product_uom_qty': 10.0,
+            'product_uom_qty': 15.0,
             'product_uom_id': 1,
             'product_id': products[2].id
         })
@@ -89,4 +88,4 @@ class TestPickingAdvancedSearch(TransactionCase):
     def test_check_product_not_moved(self):
         self.assertEqual(len(self.stock_picking_1.product_id_not_moved), 1)
         self.assertEqual(len(self.stock_picking_2.product_id_not_moved), 0)
-        self.assertEqual(len(self.stock_picking_3.product_id_not_moved), 0)
+        self.assertEqual(len(self.stock_picking_3.product_id_not_moved), 1)
