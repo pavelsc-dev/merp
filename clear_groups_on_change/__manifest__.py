@@ -9,7 +9,7 @@
     'license': 'LGPL-3',
     'installable': True,
     'images': ['static/description/main_banner.png'],
-    'summary': 'This module is clears checkboxes subgroups access rights when change groups access rights of users',
+    'summary': 'Automatically clears checkboxes while changing groups of access rights',
     'depends': [
         'merp_base',
     ],
