@@ -7,7 +7,4 @@ from odoo import models, fields
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    default_inventory_location = fields.Many2one(
-        comodel_name='stock.location',
-        string='Default Inventory Location',
-    )
+    default_inventory_location = fields.Many2one(comodel_name='stock.location')

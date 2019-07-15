@@ -7,7 +7,4 @@ from odoo import models, fields
 class Company(models.Model):
     _inherit = 'res.company'
 
-    default_inventory_location = fields.Many2one(
-        comodel_name='stock.location',
-        string='Default Inventory Location',
-    )
+    default_inventory_location = fields.Many2one(comodel_name='stock.location')

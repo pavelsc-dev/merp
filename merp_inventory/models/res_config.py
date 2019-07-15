@@ -9,6 +9,5 @@ class StockConfigSettings(models.TransientModel):
 
     default_inventory_location = fields.Many2one(
         comodel_name='stock.location',
-        string='Default Inventory Location',
         related='company_id.default_inventory_location',
     )
