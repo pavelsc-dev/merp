@@ -2,7 +2,7 @@
 # Part of Ventor modules. See LICENSE file for full copyright and licensing details.
 
 from odoo.tests.common import TransactionCase
-from odoo.exceptions import Warning
+from odoo import exceptions
 
 
 class TestMerpPickingWaveCore(TransactionCase):
@@ -80,7 +80,7 @@ class TestMerpPickingWaveCore(TransactionCase):
 
     def test_create_stock_picking(self):
         self.assertEqual(self.stock_picking_1.batch_id.picking_wave_type.id, self.picking_type[0].id)
-        with self.assertRaises(Warning):
+        with self.assertRaises(exceptions.Warning):
             self.env['stock.picking.batch'].create({
                 'name': 'test_stock_picking_batch',
                 'picking_ids': [(4, self.stock_picking_1.id)],
@@ -95,7 +95,7 @@ class TestMerpPickingWaveCore(TransactionCase):
             'picking_type_id': self.picking_type[1].id
         })
         self.assertEqual(self.picking_batch.picking_wave_type.id, self.picking_type[1].id)
-        with self.assertRaises(Warning):
+        with self.assertRaises(exceptions.Warning):
             self.stock_picking_1.write({
                 'picking_type_id': self.picking_type[0].id
             })

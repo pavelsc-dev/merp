@@ -36,15 +36,15 @@ class PickingWave(models.Model):
         if self.env.context.get('sub_done_called'):
             return super(PickingWave, self).done()
         ws_to_done = dict.fromkeys(['incoming', 'outgoing', 'internal'], self.env['stock.picking.batch'])
-        for w in self:
-            if w.picking_wave_type and \
-               w.picking_wave_type.warehouse_id.pick_type_id.id == w.picking_wave_type.id and \
-               w.picking_wave_type.warehouse_id.delivery_steps != 'ship_only':
-                ws_to_done['outgoing'] += w
-            elif w.picking_wave_type:
-                ws_to_done[w.picking_wave_type.code] += w
+        for wave in self:
+            if wave.picking_wave_type and \
+               wave.picking_wave_type.warehouse_id.pick_type_id.id == wave.picking_wave_type.id and \
+               wave.picking_wave_type.warehouse_id.delivery_steps != 'ship_only':
+                ws_to_done['outgoing'] += wave
+            elif wave.picking_wave_type:
+                ws_to_done[wave.picking_wave_type.code] += wave
 
-        for code in ws_to_done.keys():
+        for code in ws_to_done:
             #fetch {
             #     'incoming': list of stock.picking.wave,
             #     'outgoing': list of stock.picking.wave,
