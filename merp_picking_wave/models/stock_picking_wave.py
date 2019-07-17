@@ -1,4 +1,7 @@
-from openerp import models, fields, api, _
+# Copyright 2019 VentorTech OU
+# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+
+from odoo import models, api, _
 
 
 class PickingWave(models.Model):
@@ -6,75 +9,38 @@ class PickingWave(models.Model):
 
     @api.multi
     def done_outgoing(self):
-        picking_obj = self.env['stock.picking']
-        message_obj = self.env['message.wizard']
         behavior = self.env.user.company_id.outgoing_wave_behavior_on_confirm
-
-        if behavior == 1:
-            # i.e. close pickings in wave without creating backorders
-            return super(PickingWave, self).done()
-
-        elif behavior == 0:
-            # i.e. close pickings in wave with creation of backorders for incomplete pickings
+        message_obj = self.env['message.wizard']
+        res = True
+        # i.e. close pickings in wave with/without creating backorders
+        if behavior in (0, 1):
             for wave in self:
                 for picking in wave.picking_ids:
-                    if picking.state in ('cancel', 'done'):
-                        continue
-                    if picking.state == 'draft' \
-                            or all([x.qty_done == 0.0
-                                    for x in picking.move_line_ids]):
-                        # In draft or with no pack operations edited yet,
-                        # remove from wave
-                        picking.batch_id = False
-                        continue
-                    if not picking.move_line_ids:
-                        picking.do_prepare_partial()
-                    for pack in picking.move_line_ids.with_context(no_recompute=True):
-                        pack.product_qty = pack.qty_done
-                    picking.do_transfer()
+                    picking.check_behavior_0()
+                    backorder_pick = self.env['stock.picking'].search([('backorder_id', '=', picking.id)])
+                    if backorder_pick:
+                        backorder_pick.write({'batch_id': False})
+                        if behavior == 1:
+                            # i.e. close pickings in wave without creating backorders
+                            backorder_pick.action_cancel()
+                            self.message_post(
+                                body=_("Back order <em>%s</em> <b>cancelled</b>.") % (backorder_pick.name))
+            res = super(PickingWave, self).done()
 
-                    # Find backorder and remove it from wave
-                    back_orders = picking_obj.search([
-                        ('backorder_id', '=', picking.id)])
-                    back_orders.write({'batch_id': False})
-            return super(PickingWave, self).done()
-
+        # i.e. move wave to on hold if not all pickings are confirmed
         elif behavior == 2:
-            # i.e. move wave to on hold if not all pickings are confirmed
-            message = ''
-            on_hold = False
             for wave in self:
                 for picking in wave.picking_ids:
-                    if picking.state in ('cancel', 'done'):
-                        continue
-                    elif picking.state != 'assigned':
-                        break
-                    else:
-                        if not picking.move_line_ids:
-                            picking.do_prepare_partial()
-                        all_processed = True
-                        if picking.move_line_ids.filtered(lambda o: o.qty_done < o.product_qty):
-                            on_hold = True
-                        else:
-                            picking.do_transfer()
-
-                if on_hold:
-                    wave.write({'state': 'on_hold'})
-                    message = _('''
-Not all products were found in wave pickings.
-Wave is moved to "On Hold" for manual processing.
-                    ''')
-                elif wave.picking_ids:
-                    super(PickingWave, self).done()
-                    message = _('All pickings were confirmed!')
-
-            if message:
-                return {
-                    'message': message_obj.with_context(message=message).wizard_view()
-                }
-            else:
-                return True
-
+                    on_hold = picking.check_behavior_2()
+                    if on_hold:
+                        wave.write({'state': 'on_hold'})
+                        message = _('''
+                        Not all products were found in wave pickings.
+                        Wave is moved to "On Hold" for manual processing.
+                        ''')
+                        return message_obj.with_context(message=message).wizard_view()
+                    self.write({'state': 'done'})
+        return res
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
@@ -91,4 +57,38 @@ class StockPicking(models.Model):
             ('state', 'in', ('assigned', 'partially_available')),
             '|',
             ('name', '=', name),
-            ('origin','=', name)])
+            ('origin', '=', name)])
+
+    def check_behavior_0(self):
+        self.ensure_one()
+        remove_not_moved = self.env.user.company_id.outgoing_wave_remove_not_moved
+        if self.state in ('cancel', 'done'):
+            return
+        picking_not_moved = all([x.qty_done == 0.0 for x in self.move_line_ids])
+        if remove_not_moved and (self.state == 'draft' or picking_not_moved):
+            # In draft or with no pack operations edited yet,
+            # remove from wave
+            self.batch_id = False
+            return
+        if self.state != 'assigned':
+            self.action_assign()
+        if self.state == 'assigned' and picking_not_moved:
+            for move in self.move_lines.filtered(lambda m: m.state not in ['done', 'cancel']):
+                for move_line in move.move_line_ids:
+                    move_line.qty_done = move_line.product_uom_qty
+        self.action_done()
+
+    def check_behavior_2(self):
+        on_hold = False
+        if self.state in ('cancel', 'done'):
+            on_hold = False
+        elif self.state != 'assigned':
+            on_hold = True
+        else:
+            if not self.move_line_ids:
+                self.do_prepare_partial()
+            if self.move_line_ids.filtered(lambda o: o.qty_done < o.product_qty):
+                on_hold = True
+            else:
+                self.do_transfer()
+        return on_hold

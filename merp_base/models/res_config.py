@@ -1,4 +1,7 @@
-from openerp import models, fields, api
+# Copyright 2019 VentorTech OU
+# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+
+from odoo import models, fields, api
 from odoo import http
 
 import logging
@@ -9,35 +12,42 @@ class StockConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     module_merp_outgoing_routing = fields.Boolean(
-        'Outgoing Routing')
+        string='Outgoing Routing'
+    )
 
     module_merp_custom_access_rights = fields.Boolean(
-        'Custom Access Rights')
+        string='Custom Access Rights',
+    )
 
-    module_merp_receiving_wave_access_rights = fields.Boolean(
-        'Receiving Wave Access Rights')
-    module_merp_receiving_wave = fields.Boolean(
-        'Receiving Wave')
-
-    module_merp_picking_wave_access_rights = fields.Boolean(
-        'Picking Wave Access Rights')
     module_merp_picking_wave = fields.Boolean(
-        'Picking Wave')
+        string='Picking Wave',
+    )
 
     module_merp_picking_products_skip = fields.Boolean(
-        'Smart Skip of Products')
+        string='Smart Skip of Products',
+    )
 
     module_merp_instant_move = fields.Boolean(
-        'Instant Move')
+        string='Instant Move',
+    )
 
     module_merp_inventory = fields.Boolean(
-        'Ventor/mERP Inventory')
+        string='Ventor/mERP Inventory',
+    )
 
     module_merp_custom_logotype = fields.Boolean(
-        'Use Custom Logo')
+        string='Use Custom Logo',
+    )
 
-    merp_version = fields.Char(string='Ventor/mERP Version',
-        compute='_compute_merp_version', store=False)
+    module_merp_internal_warehouse = fields.Boolean(
+        string='Ventor Internal Warehouse',
+    )
+
+    merp_version = fields.Char(
+        string='Ventor/mERP Version',
+        compute='_compute_merp_version',
+        store=False,
+    )
 
     @api.depends('company_id')
     def _compute_merp_version(self):
