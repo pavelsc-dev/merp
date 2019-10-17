@@ -431,7 +431,7 @@
     </record>
 
 
-    <record id="group_merp_it_manage_package" model="res.groups">
+    <record id="group_merp_inter_manage_package" model="res.groups">
         <field name="name">Manage package</field>
         <field name="category_id" ref="category_merp_internal_transfer"/>
         <field name="comment">Scan source (destination) packages right after scanning source (destination) location. Use it if you move from one package to another or pick items from packages or pallets. Works only if package management settings is active on Odoo side</field>
