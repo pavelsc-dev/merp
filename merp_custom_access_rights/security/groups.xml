@@ -110,7 +110,7 @@
     <!-- Main menu: -->
     <record model="ir.module.category" id="category_merp_main_menu">
         <field name="name">Main menu</field>
-        <field name="sequence">100</field>
+        <field name="sequence">105</field>
     </record>
 
 
@@ -172,76 +172,218 @@
 
     <!-- Warehouse operation: -->
     <record model="ir.module.category" id="category_merp_warehouse_operation">
-        <field name="name">Warehouse operation:</field>
+        <field name="name">Warehouse operation</field>
         <field name="sequence">110</field>
     </record>
 
 
-    <record id="group_merp_manage_packages" model="res.groups">
-        <field name="name">Manage packages</field>
+    <record id="group_merp_in_scanning_wo_manage_packages" model="res.groups">
+        <field name="name">Incoming: Manage packages</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">Scan source (destination) packages right after scanning source (destination) location. Use it if you move from one package to another or pick items from packages or pallets. Works only if package management settings is active on Odoo side</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_manage_product_owner" model="res.groups">
-        <field name="name">Manage product owner</field>
+    <record id="group_merp_in_scanning_wo_manage_product_owner" model="res.groups">
+        <field name="name">Incoming: Manage product owner</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">Allow scan product owner. You can specify product owner while moving items. Working only with "Consignment" setting on Odoo side</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_show_qty" model="res.groups">
-        <field name="name">Show QTY</field>
+    <record id="group_merp_in_scanning_show_qty" model="res.groups">
+        <field name="name">Incoming: Show QTY</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">Show how many items you need to move to complete transfer</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_confirm_source_location" model="res.groups">
-        <field name="name">Confirm source location</field>
+    <record id="group_merp_in_scanning_confirm_source_location" model="res.groups">
+        <field name="name">Incoming: Confirm source location</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">User must scan barcode of the source location to confirm it. The color of the field is yellow</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_confirm_destination_location" model="res.groups">
-        <field name="name">Confirm destination location</field>
+    <record id="group_merp_in_scanning_confirm_destination_location" model="res.groups">
+        <field name="name">Incoming: Confirm destination location</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">User must scan barcode of the destination location to confirm it. The color of the field is yellow</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_confirm_product" model="res.groups">
-        <field name="name">Confirm product</field>
+    <record id="group_merp_in_scanning_confirm_product" model="res.groups">
+        <field name="name">Incoming: Confirm product</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">User must scan barcode of the product to confirm it. The color of the field is yellow</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_transfer_more_items" model="res.groups">
-        <field name="name">Transfer more items</field>
+    <record id="group_merp_in_scanning_transfer_more_items" model="res.groups">
+        <field name="name">Incoming: Transfer more items</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">Allows moving more items than expected (for example kg of meat, etc)</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_show_next_product" model="res.groups">
-        <field name="name">Show next product</field>
+    <record id="group_merp_in_scanning_show_next_product" model="res.groups">
+        <field name="name">Incoming: Show next product</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">Product field will show the next product to be picked. Use the setting during picking and delivery. It is recommended to disable the setting for the reception area</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_apply_default_lots" model="res.groups">
-        <field name="name">Apply default lots</field>
+    <record id="group_merp_in_scanning_apply_default_lots" model="res.groups">
+        <field name="name">Incoming: Apply default lots</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">If it's on, you don't need to scan lot number to confirm it. On receipts the app will create default Odoo lots and apply them to the product. On delivery zone you don't need to confirm lots and they will be taken Odoo by default.</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_change_destination_location" model="res.groups">
-        <field name="name">Change destination location</field>
+    <record id="group_merp_in_scanning_change_destination_location" model="res.groups">
+        <field name="name">Incoming: Change destination location</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">If this setting is active a user can change destination location while receiving to be placed at any available location</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+
+    <record id="group_merp_inter_scanning_wo_manage_packages" model="res.groups">
+        <field name="name">Internal: Manage packages</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Scan source (destination) packages right after scanning source (destination) location. Use it if you move from one package to another or pick items from packages or pallets. Works only if package management settings is active on Odoo side</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_inter_scanning_wo_manage_product_owner" model="res.groups">
+        <field name="name">Internal: Manage product owner</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Allow scan product owner. You can specify product owner while moving items. Working only with "Consignment" setting on Odoo side</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_inter_scanning_show_qty" model="res.groups">
+        <field name="name">Internal: Show QTY</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Show how many items you need to move to complete transfer</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_inter_scanning_confirm_source_location" model="res.groups">
+        <field name="name">Internal: Confirm source location</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">User must scan barcode of the source location to confirm it. The color of the field is yellow</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_inter_scanning_confirm_destination_location" model="res.groups">
+        <field name="name">Internal: Confirm destination location</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">User must scan barcode of the destination location to confirm it. The color of the field is yellow</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_inter_scanning_confirm_product" model="res.groups">
+        <field name="name">Internal: Confirm product</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">User must scan barcode of the product to confirm it. The color of the field is yellow</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_inter_scanning_transfer_more_items" model="res.groups">
+        <field name="name">Internal: Transfer more items</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Allows moving more items than expected (for example kg of meat, etc)</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_inter_scanning_show_next_product" model="res.groups">
+        <field name="name">Internal: Show next product</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Product field will show the next product to be picked. Use the setting during picking and delivery. It is recommended to disable the setting for the reception area</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_inter_scanning_apply_default_lots" model="res.groups">
+        <field name="name">Internal: Apply default lots</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">If it's on, you don't need to scan lot number to confirm it. On receipts the app will create default Odoo lots and apply them to the product. On delivery zone you don't need to confirm lots and they will be taken Odoo by default.</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_inter_scanning_change_destination_location" model="res.groups">
+        <field name="name">Internal: Change destination location</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">If this setting is active a user can change destination location while receiving to be placed at any available location</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+
+    <record id="group_merp_out_scanning_wo_manage_packages" model="res.groups">
+        <field name="name">Outgoing: Manage packages</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Scan source (destination) packages right after scanning source (destination) location. Use it if you move from one package to another or pick items from packages or pallets. Works only if package management settings is active on Odoo side</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_out_scanning_wo_manage_product_owner" model="res.groups">
+        <field name="name">Outgoing: Manage product owner</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Allow scan product owner. You can specify product owner while moving items. Working only with "Consignment" setting on Odoo side</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_out_scanning_show_qty" model="res.groups">
+        <field name="name">Outgoing: Show QTY</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Show how many items you need to move to complete transfer</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_out_scanning_confirm_source_location" model="res.groups">
+        <field name="name">Outgoing: Confirm source location</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">User must scan barcode of the source location to confirm it. The color of the field is yellow</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_out_scanning_confirm_destination_location" model="res.groups">
+        <field name="name">Outgoing: Confirm destination location</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">User must scan barcode of the destination location to confirm it. The color of the field is yellow</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_out_scanning_confirm_product" model="res.groups">
+        <field name="name">Outgoing: Confirm product</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">User must scan barcode of the product to confirm it. The color of the field is yellow</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_out_scanning_transfer_more_items" model="res.groups">
+        <field name="name">Outgoing: Transfer more items</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Allows moving more items than expected (for example kg of meat, etc)</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_out_scanning_show_next_product" model="res.groups">
+        <field name="name">Outgoing: Show next product</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">Product field will show the next product to be picked. Use the setting during picking and delivery. It is recommended to disable the setting for the reception area</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_out_scanning_apply_default_lots" model="res.groups">
+        <field name="name">Outgoing: Apply default lots</field>
+        <field name="category_id" ref="category_merp_warehouse_operation"/>
+        <field name="comment">If it's on, you don't need to scan lot number to confirm it. On receipts the app will create default Odoo lots and apply them to the product. On delivery zone you don't need to confirm lots and they will be taken Odoo by default.</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+    <record id="group_merp_out_scanning_change_destination_location" model="res.groups">
+        <field name="name">Outgoing: Change destination location</field>
         <field name="category_id" ref="category_merp_warehouse_operation"/>
         <field name="comment">If this setting is active a user can change destination location while receiving to be placed at any available location</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
@@ -254,14 +396,14 @@
     </record>
 
 
-    <record id="group_merp_manage_package" model="res.groups">
+    <record id="group_merp_ii_manage_package" model="res.groups">
         <field name="name">Manage package</field>
         <field name="category_id" ref="category_merp_instant_inventory"/>
         <field name="comment">It shows additional field "Package" that you can scan to make an inventory in a package. Works only if package management settings is active on Odoo side</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_manage_product_owner" model="res.groups">
+    <record id="group_merp_ii_manage_product_owner" model="res.groups">
         <field name="name">Manage product owner</field>
         <field name="category_id" ref="category_merp_instant_inventory"/>
         <field name="comment">Allow scan product owner. You can specify product owner while moving items. Working only with "Consignment" setting on Odoo side</field>
@@ -289,14 +431,14 @@
     </record>
 
 
-    <record id="group_merp_manage_package" model="res.groups">
+    <record id="group_merp_it_manage_package" model="res.groups">
         <field name="name">Manage package</field>
         <field name="category_id" ref="category_merp_internal_transfer"/>
         <field name="comment">Scan source (destination) packages right after scanning source (destination) location. Use it if you move from one package to another or pick items from packages or pallets. Works only if package management settings is active on Odoo side</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_manage_product_owner" model="res.groups">
+    <record id="group_merp_it_manage_product_owner" model="res.groups">
         <field name="name">Manage product owner</field>
         <field name="category_id" ref="category_merp_internal_transfer"/>
         <field name="comment">Allow scan product owner. You can specify product owner while moving items. Working only with "Consignment" setting on Odoo side</field>
@@ -345,14 +487,14 @@
     </record>
 
 
-    <record id="group_merp_manage_packages" model="res.groups">
+    <record id="group_merp_bp_as_wo_manage_packages" model="res.groups">
         <field name="name">Manage packages</field>
         <field name="category_id" ref="category_merp_batch_picking_as_warehouse_operation"/>
         <field name="comment"></field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_manage_product_owner" model="res.groups">
+    <record id="group_merp_bp_as_wo_manage_product_owner" model="res.groups">
         <field name="name">Manage product owner</field>
         <field name="category_id" ref="category_merp_batch_picking_as_warehouse_operation"/>
         <field name="comment"></field>
@@ -416,22 +558,22 @@
     </record>
 
     <!-- Inventory adjustments / One location inventory -->
-    <record model="ir.module.category" id="category_merp_inventory_adjustments__one_location_inventory">
+    <record model="ir.module.category" id="category_merp_inventory_adjustments_one_location_inventory">
         <field name="name">Inventory adjustments / One location inventory</field>
         <field name="sequence">150</field>
     </record>
 
 
-    <record id="group_merp_manage_packages" model="res.groups">
+    <record id="group_merp_ia_manage_packages" model="res.groups">
         <field name="name">Manage packages</field>
-        <field name="category_id" ref="category_merp_inventory_adjustments__one_location_inventory"/>
+        <field name="category_id" ref="category_merp_inventory_adjustments_one_location_inventory"/>
         <field name="comment">It shows additional field "Package" that you can scan to make an inventory in a package. Works only if package management settings is active on Odoo side</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-    <record id="group_merp_manage_product_owner" model="res.groups">
+    <record id="group_merp_ia_manage_product_owner" model="res.groups">
         <field name="name">Manage product owner</field>
-        <field name="category_id" ref="category_merp_inventory_adjustments__one_location_inventory"/>
+        <field name="category_id" ref="category_merp_inventory_adjustments_one_location_inventory"/>
         <field name="comment">Allow scan product owner. You can specify product owner while moving items. Working only with "Consignment" setting on Odoo side</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
