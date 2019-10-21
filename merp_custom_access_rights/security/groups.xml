@@ -110,7 +110,7 @@
     <!-- Main menu: -->
     <record model="ir.module.category" id="category_merp_main_menu">
         <field name="name">Main menu</field>
-        <field name="sequence">105</field>
+        <field name="sequence">205</field>
     </record>
 
 
@@ -173,7 +173,7 @@
     <!-- Warehouse operation: -->
     <record model="ir.module.category" id="category_merp_warehouse_operation">
         <field name="name">Warehouse operation</field>
-        <field name="sequence">110</field>
+        <field name="sequence">210</field>
     </record>
 
 
@@ -392,7 +392,7 @@
     <!-- Instant inventory -->
     <record model="ir.module.category" id="category_merp_instant_inventory">
         <field name="name">Instant inventory</field>
-        <field name="sequence">120</field>
+        <field name="sequence">220</field>
     </record>
 
 
@@ -427,7 +427,7 @@
     <!-- Internal Transfer -->
     <record model="ir.module.category" id="category_merp_internal_transfer">
         <field name="name">Internal Transfer</field>
-        <field name="sequence">130</field>
+        <field name="sequence">230</field>
     </record>
 
 
@@ -482,8 +482,8 @@
 
     <!-- Batch Picking (as Warehouse operation) -->
     <record model="ir.module.category" id="category_merp_batch_picking_as_warehouse_operation">
-        <field name="name">Batch Picking (as Warehouse operation)</field>
-        <field name="sequence">140</field>
+        <field name="name">Batch Picking</field>
+        <field name="sequence">240</field>
     </record>
 
 
@@ -560,7 +560,7 @@
     <!-- Inventory adjustments / One location inventory -->
     <record model="ir.module.category" id="category_merp_inventory_adjustments_one_location_inventory">
         <field name="name">Inventory adjustments / One location inventory</field>
-        <field name="sequence">150</field>
+        <field name="sequence">250</field>
     </record>
 
 
