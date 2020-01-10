@@ -13,7 +13,7 @@ LOGOTYPE_H = 500
 
 
 class MerpConfigSettings(models.TransientModel):
-    _inherit = 'merp.config.settings'
+    _inherit = 'res.config.settings'
 
     merp_logotype_file = fields.Binary('Ventor/mERP logotype file')
     merp_logotype_name = fields.Char('Ventor/mERP logotype name')

@@ -25,20 +25,4 @@
         </field>
     </record>
 
-    <record id="merp_config_setting_act_window" model="ir.actions.act_window">
-        <field name="name">Ventor/mERP Settings</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">merp.config.settings</field>
-        <field name="view_mode">form</field>
-        <field name="target">inline</field>
-    </record>
-
-    <menuitem
-        id="menu_merp_config_settings"
-        name="Ventor/mERP Settings"
-        parent="base.menu_administration"
-        sequence="150"
-        action="merp_config_setting_act_window"
-        groups="base.group_system"/>
-
 </odoo>
