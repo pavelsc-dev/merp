@@ -19,4 +19,4 @@ class Company(models.Model):
             ('0', 'Ascending (A-Z)'),
             ('1', 'Descending (Z-A)'),
         ],
-        string='Routing Order', default=0)
+        string='Routing Order', default='0')
