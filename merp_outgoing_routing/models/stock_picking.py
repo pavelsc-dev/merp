@@ -35,11 +35,6 @@ class StockPicking(models.Model):
                 if operation._compute_operation_valid():
                     res += operation
 
-            rec.operations_to_pick = res.sorted(
-                key=lambda r: getattr(r.location_id, strategy, 'None'),
-                reverse=strategy_order
-            )
-
             settings = self.env['res.company'].fields_get([
                 'outgoing_routing_strategy',
                 'outgoing_routing_order',
@@ -51,3 +46,15 @@ class StockPicking(models.Model):
                 dict(strategies)[strategy].lower(),
                 dict(orders)[strategy_order].lower()
             ])
+
+            if strategy == 'product':
+                rec.operations_to_pick = res.sorted(
+                    key=lambda r: r.product_id.name,
+                    reverse=strategy_order
+                )
+                return
+
+            rec.operations_to_pick = res.sorted(
+                key=lambda r: getattr(r.location_id, strategy, 'None'),
+                reverse=strategy_order
+            )
