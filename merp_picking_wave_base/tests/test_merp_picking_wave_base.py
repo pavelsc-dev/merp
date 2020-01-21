@@ -11,19 +11,19 @@ class TestMerpPickingWaveBase(TransactionCase):
         super(TestMerpPickingWaveBase, self).setUp()
         self.location_1 = self.env['stock.location'].create({
             'name': 'test_location_1',
-            'removal_prio': '2'
+            'removal_prio': 2
         })
         self.location_2 = self.env['stock.location'].create({
             'name': 'test_location_2',
-            'removal_prio': '3'
+            'removal_prio': 3
         })
         self.location_3 = self.env['stock.location'].create({
             'name': 'test_location_3',
-            'removal_prio': '1'
+            'removal_prio': 1
         })
         self.location_4 = self.env['stock.location'].create({
             'name': 'test_location_4',
-            'removal_prio': '4'
+            'removal_prio': 4
         })
         company = self.env.user.company_id
         picking_type = self.env['stock.picking.type'].search([], limit=1)
