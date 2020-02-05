@@ -49,6 +49,10 @@ class StockConfigSettings(models.TransientModel):
         store=False,
     )
 
+    module_two_factor_otp_auth = fields.Boolean(
+        string='Use Two Factor Authentication',
+    )
+
     @api.depends('company_id')
     def _compute_merp_version(self):
         manifest = http.addons_manifest.get('merp_base', None)
