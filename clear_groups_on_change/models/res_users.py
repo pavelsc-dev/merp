@@ -11,7 +11,7 @@ class ResUsers(models.Model):
     @api.multi
     def write(self, vals):
         group_obj = self.env['res.groups']
-        groups_by_application = group_obj.get_groups_by_application()
+        groups_by_application = group_obj.sudo().get_groups_by_application()
 
         def find_implied(group):
             # Recusively find all implied groups
