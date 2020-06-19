@@ -9,7 +9,7 @@
     'license': 'LGPL-3',
     'installable': True,
     'images': ['static/description/images/image1.JPG'],
-    'summary': 'Adds Outgoing Routing and Reservation options',
+    'summary': 'Allows to automatically build optimal picking routes and apply custom reservation options',
     'depends': [
         'merp_base',
         'sale_management',
