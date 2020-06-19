@@ -1,8 +1,8 @@
-Please read our detailed guide about optimal picking routes in your warehouse here - `https://ventor.tech/warehouse-management/how-to-build-picking-routes-in-your-warehouse-for-walking-minimization/`_
+Please read our detailed guide about optimal picking routes in your warehouse here - https://ventor.tech/warehouse-management/how-to-build-picking-routes-in-your-warehouse-for-walking-minimization/
 
 |
 
-Read also Picking and Packing optimization guide - `https://ventor.tech/mobile/pick-more-walk-less-full-picking-and-packing-optimization-in-odoo/`_
+Read also Picking and Packing optimization guide - https://ventor.tech/mobile/pick-more-walk-less-full-picking-and-packing-optimization-in-odoo/
 
 |
 
