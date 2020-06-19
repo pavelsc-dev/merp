@@ -2,13 +2,13 @@
 # Part of Ventor modules. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'Ventor Outgoing Routing',
+    'name': 'Picking and Reservation Strategy',
     "version": "12.0.1.1.0",
     'author': 'VentorTech',
     'website': 'https://ventor.tech/',
     'license': 'LGPL-3',
     'installable': True,
-    'images': ['static/description/main_banner.png'],
+    'images': ['static/description/images/image1.JPG'],
     'summary': 'Adds Outgoing Routing and Reservation options',
     'depends': [
         'merp_base',
