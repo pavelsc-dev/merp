@@ -3,18 +3,19 @@
 
 {
     'name': 'Product Multiple Barcodes',
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.2.0",
     'author': 'VentorTech',
     'website': 'https://ventor.tech/',
     'license': 'LGPL-3',
     'installable': True,
     'images': ['static/description/main_banner.png'],
-    'summary': 'Allows adding additional barcodes to your product.product and product.template models and search by these barcodes',
+    'summary': 'Allows to define multiple additional barcodes for products and to search products by additional barcodes and internal reference.',
     'depends': [
         'product',
     ],
     'data': [
         'security/ir.model.access.csv',
+        'wizard/multiply_barcode_wizard.xml',
         'views/product_template_views.xml',
     ],
 }
