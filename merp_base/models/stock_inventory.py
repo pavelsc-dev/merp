@@ -13,5 +13,5 @@ class StockInventory(models.Model):
         readonly=True, check_company=True,
         states={'draft': [('readonly', False)]},
         domain="[('company_id', '=', company_id), ('usage', 'in', ['internal', 'transit'])]",
-        default=lambda self: [self._get_default_location(), ],
+        default=lambda self: [self._get_default_location_ware_house(), ],
     )

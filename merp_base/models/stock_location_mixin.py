@@ -7,7 +7,7 @@ from odoo import models, fields, api
 class StockLocationMixin(models.Model):
     _name = 'stock.location.mixin'
 
-    def _get_default_location(self):
+    def _get_default_location_warehouse(self):
         default_location_id = (
             self.env.user.default_inventory_location and
             self.env.user.default_inventory_location.id
