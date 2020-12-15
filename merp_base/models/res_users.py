@@ -14,4 +14,5 @@ class ResUsers(models.Model):
 
     default_warehouse = fields.Many2one(
         comodel_name='stock.warehouse',
+        string='Default Warehouse For mERP'
     )
