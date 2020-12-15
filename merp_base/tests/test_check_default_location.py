@@ -35,7 +35,7 @@ class TestCheckDefaultLocation(TransactionCase):
             'company_id': self.company.id,
             'company_ids': [(4, self.company.id)]
         })
-        product = self.product.sudo(self.user.id)
+        product = self.product.with_user(self.user)
         res = product.action_update_quantity_on_hand()
         self.assertEqual(self.location.id, res['context'].get('default_location_id'))
 
@@ -43,6 +43,6 @@ class TestCheckDefaultLocation(TransactionCase):
         self.user.write({
             'default_inventory_location': self.location.id
         })
-        product = self.product.sudo(self.user.id)
+        product = self.product.with_user(self.user)
         res = product.action_update_quantity_on_hand()
         self.assertEqual(self.location.id, res['context'].get('default_location_id'))
