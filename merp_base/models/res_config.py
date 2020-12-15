@@ -45,6 +45,13 @@ class StockConfigSettings(models.TransientModel):
         string='Use Advanced Locations',
     )
 
+    inventory_location = fields.Many2one(
+        'stock.location',
+        string='Default Inventory Location',
+        readonly=False,
+        related='company_id.stock_inventory_location'
+    )
+
     @api.depends('company_id')
     def _compute_merp_version(self):
         manifest = http.addons_manifest.get('merp_base', None)

@@ -2,21 +2,19 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 
 {
-    'name': 'Ventor Base',
-    'version': '14.0.1.1.0',
+    'name': 'Ventor Default Locations',
+    "version": "13.0.1.0.0",
     'author': 'VentorTech',
     'website': 'https://ventor.tech/',
     'license': 'LGPL-3',
     'installable': True,
     'images': ['static/description/main_banner.png'],
-    'summary': 'Base module that allow relation between Ventor modules',
+    'summary': 'Adding small improvements to Locations',
     'depends': [
-        'base',
-        'stock',
-        'sale_management',
+        'merp_base',
+        'merp_custom_access_rights'
     ],
     'data': [
-        'security/ir.model.access.csv',
         'views/res_config.xml',
         'views/res_users.xml',
         'views/stock_inventory.xml',
