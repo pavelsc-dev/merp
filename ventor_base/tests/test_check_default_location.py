@@ -16,7 +16,7 @@ class TestCheckDefaultLocation(TransactionCase):
             'login': 'test_user',
             'email': 'test.user@email.com'
         })
-        self.ventor_worker = self.env.ref('merp_custom_access_rights.ventor_role_wh_worker')
+        self.ventor_worker = self.env.ref('ventor_base.ventor_role_wh_worker')
         self.ventor_worker.write({'users': [(4, self.user.id)]})
         self.inventory_manager = self.env.ref('stock.group_stock_manager')
         self.inventory_manager.write({'users': [(4, self.user.id)]})
