@@ -1,5 +1,5 @@
 # Copyright 2020 VentorTech OU
-# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 
 import logging
 

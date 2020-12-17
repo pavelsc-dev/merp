@@ -1,9 +1,9 @@
-# Copyright 2019 VentorTech OU
-# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+# Copyright 2020 VentorTech OU
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 
 {
     'name': 'Picking and Reservation Strategy',
-    "version": "13.0.1.1.0",
+    "version": "14.0.1.0.0",
     'author': 'VentorTech',
     'website': 'https://ventor.tech/',
     'license': 'LGPL-3',
@@ -11,7 +11,7 @@
     'images': ['static/description/images/image1.JPG'],
     'summary': 'Allows to automatically build optimal picking routes and apply custom reservation options',
     'depends': [
-        'merp_base',
+        'ventor_base',
         'sale_management',
     ],
     'data': [

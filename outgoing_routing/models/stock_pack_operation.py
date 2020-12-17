@@ -1,5 +1,5 @@
-﻿# Copyright 2019 VentorTech OU
-# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+﻿# Copyright 2020 VentorTech OU
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 
 from odoo import models, api
 
@@ -13,5 +13,4 @@ class StockPackOperation(models.Model):
         if hasattr(super(StockPackOperation, self), '_compute_operation_valid'):
             res &= super(StockPackOperation, self)._compute_operation_valid()
         res &= self.qty_done != self.product_qty
-        # res &= self.state not in ('draft', 'cancel', 'done')
         return res

@@ -1,5 +1,5 @@
-# Copyright 2019 VentorTech OU
-# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+# Copyright 2020 VentorTech OU
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 
 from datetime import date
 from odoo.tests.common import TransactionCase
@@ -32,7 +32,7 @@ class TestMerpQuantsLocationRouting(TransactionCase):
         self.fifo = self.env.ref('stock.removal_fifo')
         self.lifo = self.env.ref('stock.removal_lifo')
         self.removal_location_priority = self.env.ref(
-            'merp_outgoing_routing.removal_location_priority'
+            'outgoing_routing.removal_location_priority'
         )
 
         # Create locations:

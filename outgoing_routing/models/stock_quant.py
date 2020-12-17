@@ -1,5 +1,5 @@
 # Copyright 2020 VentorTech OU
-# Part of Ventor modules. See LICENSE file for full copyright and licensing details.
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 
 from odoo import api, models, fields
 from odoo.tools.float_utils import float_compare
@@ -74,7 +74,7 @@ class StockQuant(models.Model):
     def _reorder_quantity(self, quants, product_id):
         """ Reorders quants by product quantity in locations and location priority
         """
-        default_route = 'name' # i.e. location_id.name
+        default_route = 'name'  # i.e. location_id.name
 
         route = self.env.user.company_id.outgoing_routing_strategy
         order = self.env.user.company_id.outgoing_routing_order
@@ -86,7 +86,7 @@ class StockQuant(models.Model):
         rounding = product_id.uom_id.rounding
 
         locations = {}
-        queues = [self.env['stock.quant'], self.env['stock.quant']] # (lprio, hprio)
+        queues = [self.env['stock.quant'], self.env['stock.quant']]  # (lprio, hprio)
 
         for quant in quants:
             locations.setdefault(quant.location_id, []).append(quant)
