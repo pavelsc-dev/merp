@@ -2,20 +2,20 @@
 <odoo>
 
     <record id="view_stock_config_settings" model="ir.ui.view">
-        <field name="name">Ventor/mERP Demo - Stock Settings</field>
+        <field name="name">Ventor Application Demo - Stock Settings</field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="base.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('settings')]" position="inside" >
-                <div class="app_settings_block" data-string="Ventor/mERP" string="Ventor/mERP" data-key="ventor_base" groups="stock.group_stock_manager">
-                    <h2>Ventor/mERP App modules</h2>
+                <div class="app_settings_block" data-string="Ventor Application" string="Ventor Application" data-key="ventor_base" groups="stock.group_stock_manager">
+                    <h2>Ventor Application modules</h2>
                     <div class="row mt16 o_settings_container">
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="module_merp_picking_wave"/>
+                                <field name="module_picking_wave"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="module_merp_picking_wave"/>
+                                <label for="module_picking_wave"/>
                                 <div class="text-muted">
                                     Enable Picking Wave
                                 </div>
@@ -23,10 +23,10 @@
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="module_merp_outgoing_routing"/>
+                                <field name="module_outgoing_routing"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="module_merp_outgoing_routing"/>
+                                <label for="module_outgoing_routing"/>
                                 <div class="text-muted">
                                     Add Outgoing Routing strategy options (sort locations)
                                 </div>
@@ -34,10 +34,10 @@
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="module_merp_picking_products_skip"/>
+                                <field name="module_picking_products_skip"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="module_merp_picking_products_skip"/>
+                                <label for="module_picking_products_skip"/>
                                 <div class="text-muted">
                                     Allow smart skip of products in pickings and picking waves
                                 </div>
@@ -45,10 +45,10 @@
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
-                                <field name="module_merp_instant_move"/>
+                                <field name="module_instant_move"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="module_merp_instant_move"/>
+                                <label for="module_instant_move"/>
                                 <div class="text-muted">
                                     Allow add more items automatically via Ventor App
                                 </div>
@@ -57,9 +57,9 @@
                         <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane"/>
                             <div class="o_setting_right_pane">
-                                <field name="merp_version"/>
+                                <field name="base_version"/>
                                 <div class="text-muted">
-                                    Ventor/mERP version
+                                    Base Module Version
                                 </div>
                             </div>
                         </div>
@@ -82,9 +82,9 @@
                         <div class="col-xs-12 col-md-6 o_setting_box">
                             <div class="o_setting_left_pane"/>
                             <div class="o_setting_right_pane">
-                                <field name="merp_logotype_name" invisible="1"/>
-                                <field name="merp_logotype_file" widget="binary"
-                                    filename="merp_logotype_name" />
+                                <field name="logotype_name" invisible="1"/>
+                                <field name="logotype_file" widget="binary"
+                                    filename="logotype_name" />
                                 <div class="text-muted">
                                     My Logo
                                 </div>

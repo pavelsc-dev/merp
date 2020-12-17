@@ -17,28 +17,28 @@ LOGOTYPE_H = 500
 class MerpConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    merp_logotype_file = fields.Binary('Ventor/mERP logotype file')
-    merp_logotype_name = fields.Char('Ventor/mERP logotype name')
+    logotype_file = fields.Binary('Ventor Application Logo File')
+    logotype_name = fields.Char('Ventor Application Logo Filename')
 
-    module_merp_outgoing_routing = fields.Boolean(
+    module_outgoing_routing = fields.Boolean(
         string='Outgoing Routing'
     )
 
-    module_merp_picking_wave = fields.Boolean(
+    module_picking_wave = fields.Boolean(
         string='Picking Wave',
     )
 
-    module_merp_picking_products_skip = fields.Boolean(
+    module_picking_products_skip = fields.Boolean(
         string='Smart Skip of Products',
     )
 
-    module_merp_instant_move = fields.Boolean(
+    module_instant_move = fields.Boolean(
         string='Instant Move',
     )
 
-    merp_version = fields.Char(
-        string='Ventor/mERP Version',
-        compute='_compute_merp_version',
+    base_version = fields.Char(
+        string='Base Module Version',
+        compute='_compute_base_version',
         store=False,
     )
 
@@ -50,10 +50,10 @@ class MerpConfigSettings(models.TransientModel):
     )
 
     @api.depends('company_id')
-    def _compute_merp_version(self):
+    def _compute_base_version(self):
         manifest = http.addons_manifest.get('ventor_base', None)
         version = manifest['version'].split('.')
-        self.merp_version = '.'.join(version[-3:])
+        self.base_version = '.'.join(version[-3:])
 
     @api.model
     def get_values(self):

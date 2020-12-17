@@ -10,7 +10,7 @@
         <field name="arch" type="xml">
             <data>
                 <xpath expr="//group[@name='messaging']" position="after">
-                    <group string="Ventor/mERP Application" name="merp" col="8">
+                    <group string="Ventor Application Settings" name="merp" col="8">
                         <label for="default_inventory_location" colspan="3"/>
                         <field name="default_inventory_location" nolabel="1" colspan="5"/>
                         <label for="default_warehouse" colspan="3"/>
