@@ -11,8 +11,9 @@
     'images': ['static/description/images/image1.JPG'],
     'summary': 'Allows to automatically build optimal picking routes and apply custom reservation options',
     'depends': [
-        'ventor_base',
         'sale_management',
+        'stock_picking_batch',
+        'ventor_base',
     ],
     'data': [
         'data/product_removal.xml',
@@ -20,5 +21,6 @@
         'views/stock.xml',
         'views/picking.xml',
         'views/report_stockpicking.xml',
+        'views/stock_picking_wave.xml',
     ],
 }
