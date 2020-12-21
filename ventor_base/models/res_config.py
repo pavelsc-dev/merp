@@ -14,7 +14,7 @@ LOGOTYPE_W = 500
 LOGOTYPE_H = 500
 
 
-class MerpConfigSettings(models.TransientModel):
+class VentorConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     logotype_file = fields.Binary('Ventor Application Logo File')
@@ -34,6 +34,11 @@ class MerpConfigSettings(models.TransientModel):
 
     module_instant_move = fields.Boolean(
         string='Instant Move',
+    )
+
+    add_barcode_on_view = fields.Boolean(
+        default=False,
+        string='Add a Barcode Field on a Stock Location Form'
     )
 
     base_version = fields.Char(
@@ -57,34 +62,36 @@ class MerpConfigSettings(models.TransientModel):
 
     @api.model
     def get_values(self):
-        res = super(MerpConfigSettings, self).get_values()
-        conf = self.env['merp.config'].sudo()
+        res = super(VentorConfigSettings, self).get_values()
+        conf = self.env['ventor.config'].sudo()
         logo = conf.get_param('logo.file', default=None)
         name = conf.get_param('logo.name', default=None)
 
         res.update({
-            'merp_logotype_file': logo or False,
-            'merp_logotype_name': name or False
+            'logotype_file': logo or False,
+            'logotype_name': name or False
         })
         return res
 
     def set_values(self):
-        res = super(MerpConfigSettings, self).set_values()
+        res = super(VentorConfigSettings, self).set_values()
 
-        conf = self.env['merp.config'].sudo()
+        conf = self.env['ventor.config'].sudo()
+        view_with_barcode = self.env.ref('ventor_base.view_location_form_inherit_additional_barcode')
         for record in self:
-            self._validate_merp_logotype(record)
-            conf.set_param('logo.file', record.merp_logotype_file or False)
-            conf.set_param('logo.name', record.merp_logotype_name or False)
+            self._validate_logotype(record)
+            conf.set_param('logo.file', record.logotype_file or False)
+            conf.set_param('logo.name', record.logotype_name or False)
+            view_with_barcode.active = record.add_barcode_on_view
 
         return res
 
     @staticmethod
-    def _validate_merp_logotype(record):
-        if not record.merp_logotype_file:
+    def _validate_logotype(record):
+        if not record.logotype_file:
             return False
 
-        dat = base64.decodebytes(record.merp_logotype_file)
+        dat = base64.decodebytes(record.logotype_file)
         png = (dat[:8] == b'\211PNG\r\n\032\n' and (dat[12:16] == b'IHDR'))
         if not png:
             raise Warning(_('Apparently, the logotype is not a .png file.'))
