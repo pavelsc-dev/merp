@@ -67,6 +67,7 @@ class VentorConfigSettings(models.TransientModel):
 
         logo = conf.get_param('logo.file', default=None)
         name = conf.get_param('logo.name', default=None)
+
         res.update({
             'logotype_file': logo or False,
             'logotype_name': name or False
@@ -96,6 +97,7 @@ class VentorConfigSettings(models.TransientModel):
             return False
 
         dat = base64.decodebytes(self.logotype_file)
+
         png = (dat[:8] == b'\211PNG\r\n\032\n' and (dat[12:16] == b'IHDR'))
         if not png:
             raise Warning(_('Apparently, the logotype is not a .png file.'))
