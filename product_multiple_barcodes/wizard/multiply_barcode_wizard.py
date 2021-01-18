@@ -2,9 +2,6 @@
 # Part of Ventor modules. See LICENSE file for full copyright and licensing details.
 
 from odoo import models, fields
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class MultiplyBarcodeWizard(models.TransientModel):
