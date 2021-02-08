@@ -77,6 +77,7 @@ class ExcelWizard(models.TransientModel):
 
     _inherit = "custom.import.wizard"
     _name = "crm.import.wizard"
+    _description = "Wizard for import leads in CRM"
 
     salesperson_id = fields.Many2one("res.users")
     sales_team_id = fields.Many2one(
