@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 
 {
-    "name": "Vive Health Import Leads",
+    "name": "Custom Import Wizard",
     "category": "Accounting",
     "version": "12.0.1.0.0",
     "website": "https://ventor.tech",
