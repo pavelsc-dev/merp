@@ -5,7 +5,7 @@
 {
     "name": "Custom Import Wizard",
     "category": "Accounting",
-    "version": "12.0.1.0.0",
+    "version": "14.0.1.0.0",
     "website": "https://ventor.tech",
     "author": "VentorTech OU",
     "license": "LGPL-3",
