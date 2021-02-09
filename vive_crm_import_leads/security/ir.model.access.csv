@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-import_crm_wizard,import_crm_wizard,model_crm_import_wizard,vive_crm_import_leads.crm_lead_import_group_user,1,1,1,1
